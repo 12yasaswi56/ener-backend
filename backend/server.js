@@ -106,7 +106,14 @@ app.get('/search', async (req, res) => {
 
 
 
-
+app.get("/latestpreprints", async (req, res) => {
+    try {
+      const preprints = await Preprint.find().sort({ _id: -1 }).limit(10); // Fetch latest 10 preprints
+      res.json(preprints);
+    } catch (err) {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  });
 
 
 
